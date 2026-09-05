@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package ru.joke.am.protocol.client;
+
+option java_multiple_files = true;
+option java_package = "ru.joke.am.protocol.client";
+option java_outer_classname = "ClientMessagesProtobuf";
+
+import "google/protobuf/timestamp.proto";
+
+enum ClientStatusProto {
+  CLIENT_STATUS_UNSPECIFIED = 0;
+  CLIENT_STATUS_STARTED = 1;
+  CLIENT_STATUS_ALIVE = 2;
+  CLIENT_STATUS_STOPPED = 3;
+}
+
+message ClientStatusMessageProto {
+  string host = 1;
+  string appName = 2;
+  google.protobuf.Timestamp message_date_time = 3;
+  string message_time_zone = 4;
+  ClientStatusProto status = 5;
+  int32 port = 6;
+}
+
+enum AgentExecutionStatusProto {
+  AGENT_STATUS_UNSPECIFIED = 0;
+  AGENT_STATUS_STARTED = 1;
+  AGENT_STATUS_FINISHED = 2;
+  AGENT_STATUS_STOPPED = 3;
+  AGENT_STATUS_ERROR = 4;
+}
+
+message AgentExecutionStatusMessageProto {
+  string executionId = 1;
+  string triggerId = 2;
+  string agentConfigId = 3;
+  optional string info = 4;
+  AgentExecutionStatusProto status = 5;
+  string host = 6;
+  string appName = 7;
+  google.protobuf.Timestamp message_date_time = 8;
+  string message_time_zone = 9;
+  int32 port = 10;
+}

@@ -1,0 +1,76 @@
+syntax = "proto3";
+
+package ru.joke.am.protocol.server;
+
+option java_multiple_files = true;
+option java_package = "ru.joke.am.protocol.server";
+option java_outer_classname = "ServerMessagesProtobuf";
+
+import "google/protobuf/struct.proto";
+
+message StopTriggerMessageProto {
+  string triggerId = 1;
+}
+
+message PartitionProto {
+  string host = 1;
+  int32 index = 2;
+}
+
+enum DuplicationStartupPolicyProto {
+  POLICY_UNSPECIFIED = 0;
+  POLICY_IGNORE = 1;
+  POLICY_INTERRUPT_EXISTING = 2;
+  POLICY_ALLOW = 3;
+}
+
+enum DestinationTypeProto {
+  DESTINATION_TYPE_UNSPECIFIED = 0;
+  DESTINATION_TYPE_QUEUE = 1;
+  DESTINATION_TYPE_TOPIC = 2;
+}
+
+message JmsDataSourceConfigurationProto {
+  string connectionFactory = 1;
+  DestinationTypeProto destinationType = 2;
+  bool isDurable = 3;
+  string destination = 4;
+  optional string messageSelector = 5;
+  optional string subscriptionId = 6;
+}
+
+message KafkaDataSourceConfigurationProto {
+  string destination = 1;
+  optional string messageSelector = 2;
+  optional string subscriptionId = 3;
+  google.protobuf.Struct consumerProperties = 4;
+}
+
+message AgentConfigurationProto {
+  string name = 1;
+  string agentConfigId = 2;
+  string agentId = 3;
+  int32 threads = 4;
+  int32 retries = 5;
+  DuplicationStartupPolicyProto duplicationStartupPolicy = 6;
+  google.protobuf.Struct parameters = 7;
+  optional KafkaDataSourceConfigurationProto kafkaDataSource = 8;
+  optional JmsDataSourceConfigurationProto jmsDataSource = 9;
+}
+
+message ContinuousTriggerMessageProto {
+  string triggerId = 1;
+  string executionId = 2;
+  int32 maxConsecutiveExceptions = 3;
+  repeated PartitionProto partitions = 4;
+  AgentConfigurationProto agent = 5;
+}
+
+message ScheduledTriggerMessageProto {
+  string triggerId = 1;
+  string executionId = 2;
+  int32 maxConsecutiveExceptions = 3;
+  int32 maxExecutionTime = 4;
+  repeated PartitionProto partitions = 5;
+  repeated AgentConfigurationProto agents = 6;
+}

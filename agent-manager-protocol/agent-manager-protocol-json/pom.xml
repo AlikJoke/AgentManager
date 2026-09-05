@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.joke.am</groupId>
+        <artifactId>agent-manager-protocol</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>agent-manager-protocol-json</artifactId>
+    <name>Agent Manager Protocol JSON Support</name>
+    <description>Agent Manager Protocol JSON Support</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.joke.am</groupId>
+            <artifactId>agent-manager-protocol-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.joke.am</groupId>
+            <artifactId>agent-manager-protocol-core</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+            <type>test-jar</type>
+        </dependency>
+
+        <dependency>
+            <groupId>tools.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>3.2.2</version>
+        </dependency>
+    </dependencies>
+</project>

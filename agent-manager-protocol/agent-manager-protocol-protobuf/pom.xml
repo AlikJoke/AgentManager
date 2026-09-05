@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.joke.am</groupId>
+        <artifactId>agent-manager-protocol</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>agent-manager-protocol-protobuf</artifactId>
+    <name>Agent Manager Protocol Protobuf Support</name>
+    <description>Agent Manager Protocol Protobuf Support</description>
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.joke.am</groupId>
+            <artifactId>agent-manager-protocol-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ru.joke.am</groupId>
+            <artifactId>agent-manager-protocol-core</artifactId>
+            <version>${project.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>4.35.1</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.github.ascopes</groupId>
+                <artifactId>protobuf-maven-plugin</artifactId>
+                <version>5.1.8</version>
+                <configuration>
+                    <protoc kind="binary-maven">
+                        <version>4.35.1</version>
+                    </protoc>
+                    <sourceDirectories>src/main/proto</sourceDirectories>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
